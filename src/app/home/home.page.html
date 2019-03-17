@@ -1,12 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-toolbar color="primary" >
+    <ion-item color="primary" lines="none">
+        <ion-label></ion-label>
+        <span *ngIf="value==0" class="flag-icon flag-icon-fi"></span>
+        <span *ngIf="value==2" class="flag-icon flag-icon-gb"></span>
+        <span *ngIf="value==1" class="flag-icon flag-icon-se"></span>
+        <ion-select [(ngModel)]="value">
+          <ion-select-option [value]="0" selected>FIN</ion-select-option>
+          <ion-select-option [value]="2">EN</ion-select-option>
+          <ion-select-option [value]="1">SE</ion-select-option>
+        </ion-select>
+    </ion-item>
   </ion-toolbar>
-</ion-header>
+ </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <h1 *ngIf="value==2" style="text-align: center">Search company</h1>
+  <h1 *ngIf="value==0" style="text-align: center">Hae Yritys</h1>
+  <h1 *ngIf="value==1" style="text-align: center">Sök ett företag</h1>
+  <form>
+      <ion-item>
+        <ion-label>ID</ion-label>
+        <ion-input type="text" [(ngModel)]="id" name="id"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
+      </ion-item>
+      <ion-button (click)="search()" type="submit" expand="block">Search</ion-button>
+    </form>
+    <div *ngFor="let item of data">
+      <ion-item *ngIf="data" >
+        <h2>{{ item.names[value].name }}</h2>
+        <ion-button (click)="go(item)" slot="end">View</ion-button>
+      </ion-item>
+    </div>
 </ion-content>
