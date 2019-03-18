@@ -36,7 +36,6 @@ export class HomePage {
   go(data: any){
     this.storage.set('data', data);
     this.storage.set('language', this.value);
-    console.log("this is the data" + this.storage.get('data'));
     this.router.navigate(['details']);
   }
 }

@@ -3,12 +3,20 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title *ngIf="data">{{data.names[i]}}</ion-title>
+      <ion-title *ngIf="data">{{ data.names[i].name }}</ion-title>
     </ion-toolbar>
    </ion-header>
 
-<ion-content padding>
+<ion-content padding *ngIf="data">
 <p>Y-tunnus {{data.businessId}}</p>
 <p>Rekisteröinti pvm {{data.registrationDate | date: ('dd.MM.yyyy')}}</p>
-<p>Yritysmuoto {{data.companyForm}}</p>
+<p>Yritysmuoto {{data.companyForms[i].name}}</p>
+<p>Toimiala {{data.businessLines[i].name}}</p>
+<p>Kieli {{data.languages[i].name}}</p>
+<p>Kotipaikka {{data.registedOffices[i].name}}</p>
+<p *ngIf="data.contactDetails[i]">yhteystiedot {{data.contactDetails[i].name}}</p>
+<p>Osoite</p>
+<p>{{data.addresses[0].street}}</p>
+<p>{{data.addresses[0].postCode}}</p>
+<p>{{data.addresses[0].city}}</p>
 </ion-content>

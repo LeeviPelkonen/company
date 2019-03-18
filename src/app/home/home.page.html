@@ -15,24 +15,32 @@
  </ion-header>
 
 <ion-content padding>
-  <h1 *ngIf="value==2" style="text-align: center">Search company</h1>
-  <h1 *ngIf="value==0" style="text-align: center">Hae Yritys</h1>
+  <h1 *ngIf="value==0" style="text-align: center">Yrityshaku</h1>
   <h1 *ngIf="value==1" style="text-align: center">Sök ett företag</h1>
+  <h1 *ngIf="value==2" style="text-align: center">Search company</h1>
   <form>
       <ion-item>
-        <ion-label>ID</ion-label>
+        <ion-label *ngIf="value==0">Y-Tunnus</ion-label>
+        <ion-label *ngIf="value==1">FO-number</ion-label>
+        <ion-label *ngIf="value==2">Business ID</ion-label>
         <ion-input type="text" [(ngModel)]="id" name="id"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Name</ion-label>
+        <ion-label *ngIf="value==0">Nimi</ion-label>
+        <ion-label *ngIf="value==1">Namn</ion-label>
+        <ion-label *ngIf="value==2">Name</ion-label>
         <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
       </ion-item>
-      <ion-button (click)="search()" type="submit" expand="block">Search</ion-button>
+      <ion-button *ngIf="value==0" (click)="search()" type="submit" expand="block">Etsi</ion-button>
+      <ion-button *ngIf="value==1" (click)="search()" type="submit" expand="block">Sök</ion-button>
+      <ion-button *ngIf="value==2" (click)="search()" type="submit" expand="block">Search</ion-button>
     </form>
     <div *ngFor="let item of data">
       <ion-item *ngIf="data" >
         <h2>{{ item.names[value].name }}</h2>
-        <ion-button (click)="go(item)" slot="end">View</ion-button>
+        <ion-button *ngIf="value==0" (click)="go(item)" slot="end">Avaa</ion-button>
+        <ion-button *ngIf="value==1" (click)="go(item)" slot="end">öppna</ion-button>
+        <ion-button *ngIf="value==2" (click)="go(item)" slot="end">View</ion-button>
       </ion-item>
     </div>
 </ion-content>
