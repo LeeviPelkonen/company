@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
 })
 export class DetailsPage implements OnInit {
   data: any;
-  i: string;
+  i:string;
 
   constructor(
     private router: Router,
@@ -19,10 +19,10 @@ export class DetailsPage implements OnInit {
   ngOnInit() {
     this.storage.get('language').then((i) => {
       this.i = i;
-      console.log(i);
     });
     this.storage.get('data').then((val) => {
       this.data = val;
+      console.log(val);
     });
   }
 }

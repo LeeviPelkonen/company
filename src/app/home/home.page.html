@@ -36,7 +36,7 @@
       <ion-button *ngIf="value==2" (click)="search()" type="submit" expand="block">Search</ion-button>
     </form>
     <div *ngFor="let item of data">
-      <ion-item *ngIf="data" >
+      <ion-item>
         <h2>{{ item.names[value].name }}</h2>
         <ion-button *ngIf="value==0" (click)="go(item)" slot="end">Avaa</ion-button>
         <ion-button *ngIf="value==1" (click)="go(item)" slot="end">öppna</ion-button>

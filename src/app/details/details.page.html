@@ -8,8 +8,7 @@
    </ion-header>
 
 <ion-content padding *ngIf="data">
-<p>Y-tunnus {{data.businessId}}</p>
-<p>Rekisteröinti pvm {{data.registrationDate | date: ('dd.MM.yyyy')}}</p>
+<p>{{ data.names[i].name }}</p>
 <p>Yritysmuoto {{data.companyForms[i].name}}</p>
 <p>Toimiala {{data.businessLines[i].name}}</p>
 <p>Kieli {{data.languages[i].name}}</p>

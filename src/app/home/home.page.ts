@@ -12,7 +12,19 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   id: string;
   name: string;
-  data: any;
+  data = [];
+  filteredData = {
+    "names": [],
+    "auxiliaryNames": [],
+    "addresses": [],
+    "companyForms": [],
+    "businessLines": [],
+    "languages": [],
+    "registedOffices": [],
+    "contactDetails": [],
+    "registeredEntries": [],
+    "businessIdChanges": []
+  }
   value = 0;
   mediaURL: "http://avoindata.prh.fi/bis/v1/";
 
@@ -25,17 +37,99 @@ export class HomePage {
 
   search(){
     console.log("searching now");
+    this.data=[];
+    this.filteredData = {
+      "names": [],
+      "auxiliaryNames": [],
+      "addresses": [],
+      "companyForms": [],
+      "businessLines": [],
+      "languages": [],
+      "registedOffices": [],
+      "contactDetails": [],
+      "registeredEntries": [],
+      "businessIdChanges": []
+    };
     this.http.get("http://avoindata.prh.fi/bis/v1/" + this.id, {}, {})
       .then(data => {
-        console.log(JSON.parse(data.data).results[0]);
-        this.data = JSON.parse(data.data).results;
-        console.log(this.data[0].name);
-        console.log(this.data[0].names);
+        this.filterData(JSON.parse(data.data).results);
       });
   }
+
   go(data: any){
     this.storage.set('data', data);
     this.storage.set('language', this.value);
     this.router.navigate(['details']);
+  }
+
+  filterData(datas:any){
+    datas.forEach(data => {
+    //filtering outdated and unnecessary data
+    //names
+    console.log("filtering this");
+    //console.log(data);
+    data.names.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.names.push(res);
+      }
+    });
+    //auxiliaryNames
+    data.auxiliaryNames.forEach(res => {
+      if(res.version == 1){
+        console.log(res);
+        this.filteredData.auxiliaryNames.push(res);
+      }
+    });
+    //addresses
+    data.addresses.forEach(res => {
+      if(res.version == 1 && res.type == 1){
+        console.log(res);
+        this.filteredData.addresses.push(res);
+      }
+    });
+    //companyForms
+    data.companyForms.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.companyForms.push(res);
+      }
+    });
+    //businessLines
+    data.businessLines.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.businessLines.push(res);
+      }
+    });
+    //languages
+    data.languages.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.languages.push(res);
+      }
+    });
+    //registedOffices
+    data.registedOffices.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.registedOffices.push(res);
+      }
+    });
+    //contactDetails
+    data.contactDetails.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.contactDetails.push(res);
+      }
+    });
+    //registeredEntries
+    data.registeredEntries.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.registeredEntries.push(res);
+      }
+    });
+    //businessIdChanges
+    data.businessIdChanges.forEach(res => {
+      if(res.version == 1){
+        this.filteredData.businessIdChanges.push(res);
+      }
+    });
+    this.data.push(this.filteredData);
+  });
   }
 }
