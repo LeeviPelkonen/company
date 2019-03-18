@@ -8,14 +8,29 @@
    </ion-header>
 
 <ion-content padding *ngIf="data">
-<p>{{ data.names[i].name }}</p>
-<p>Yritysmuoto {{data.companyForms[i].name}}</p>
-<p>Toimiala {{data.businessLines[i].name}}</p>
-<p>Kieli {{data.languages[i].name}}</p>
-<p>Kotipaikka {{data.registedOffices[i].name}}</p>
-<p *ngIf="data.contactDetails[i]">yhteystiedot {{data.contactDetails[i].name}}</p>
-<p>Osoite</p>
-<p>{{data.addresses[0].street}}</p>
-<p>{{data.addresses[0].postCode}}</p>
-<p>{{data.addresses[0].city}}</p>
+  <ion-list  lines="none">
+    <ion-item>
+      <p>Yritysmuoto</p> 
+      <p slot="end">{{ data.companyForms[i].name }}</p>
+    </ion-item>
+    <ion-item>
+      <p>Päätoimiala</p> 
+      <p slot="end">{{ data.businessLines[i].name }}</p>
+    </ion-item>
+    <ion-item>
+      <p>Kieli</p> 
+      <p slot="end"> {{ data.languages[i].name }}</p>
+    </ion-item>
+    <ion-item>
+      <p>Kotipaikka</p> 
+      <p slot="end">{{ data.registedOffices[i].name }}</p>
+    </ion-item>
+    <p *ngIf="data.contactDetails[i]">yhteystiedot {{ data.contactDetails[i].name }}</p><br>
+  <ion-item>
+    <p>Osoite</p>
+    <p>{{ data.addresses[0].street }}</p>
+    <p>{{ data.addresses[0].postCode }}</p>
+    <p>{{ data.addresses[0].city }}</p>
+  </ion-item>
+  </ion-list>
 </ion-content>
