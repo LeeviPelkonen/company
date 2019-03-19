@@ -14,6 +14,8 @@ export class HomePage {
   name: string;
   data = [];
   filteredData = {
+    "businessId": "",
+    "registrationDate": "",
     "names": [],
     "auxiliaryNames": [],
     "addresses": [],
@@ -39,6 +41,8 @@ export class HomePage {
     console.log("searching now");
     this.data=[];
     this.filteredData = {
+      "businessId": "",
+      "registrationDate": "",
       "names": [],
       "auxiliaryNames": [],
       "addresses": [],
@@ -64,6 +68,8 @@ export class HomePage {
 
   filterData(datas:any){
     datas.forEach(data => {
+      this.filteredData.businessId = data.businessId;
+      this.filteredData.registrationDate = data.registrationDate;
     //filtering outdated and unnecessary data
     //names
     console.log("filtering this");
@@ -90,13 +96,18 @@ export class HomePage {
     //companyForms
     data.companyForms.forEach(res => {
       if(res.version == 1){
-        this.filteredData.companyForms.push(res);
+        if(res.language == "FI")this.filteredData.companyForms[0] = res;
+        if(res.language == "SE")this.filteredData.companyForms[1] = res;
+        if(res.language == "EN")this.filteredData.companyForms[2] = res;
+        
       }
     });
     //businessLines
     data.businessLines.forEach(res => {
       if(res.version == 1){
-        this.filteredData.businessLines.push(res);
+        if(res.language == "FI")this.filteredData.businessLines[0] = res;
+        if(res.language == "SE")this.filteredData.businessLines[1] = res;
+        if(res.language == "EN")this.filteredData.businessLines[2] = res;
       }
     });
     //languages
@@ -108,19 +119,21 @@ export class HomePage {
     //registedOffices
     data.registedOffices.forEach(res => {
       if(res.version == 1){
-        this.filteredData.registedOffices.push(res);
+        if(res.language == "FI")this.filteredData.registedOffices[0] = res;
+        if(res.language == "SE")this.filteredData.registedOffices[1] = res;
+        if(res.language == "EN")this.filteredData.registedOffices[2] = res;
       }
     });
     //contactDetails
     data.contactDetails.forEach(res => {
-      if(res.version == 1){
-        this.filteredData.contactDetails.push(res);
+      if(res.version == 1 && res.value.includes("0")){
+        this.filteredData.contactDetails.push(res)
       }
     });
     //registeredEntries
     data.registeredEntries.forEach(res => {
       if(res.version == 1){
-        this.filteredData.registeredEntries.push(res);
+      this.filteredData.registeredEntries.push(res);
       }
     });
     //businessIdChanges

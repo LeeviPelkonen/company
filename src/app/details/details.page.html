@@ -8,29 +8,56 @@
    </ion-header>
 
 <ion-content padding *ngIf="data">
-  <ion-list  lines="none">
+  <ion-list >
     <ion-item>
-      <p>Yritysmuoto</p> 
-      <p slot="end">{{ data.companyForms[i].name }}</p>
+      <p *ngIf="i==0">Y-Tunnus</p>
+      <p *ngIf="i==1">FO-number</p>
+      <p *ngIf="i==2">Business ID</p>
+      <p slot="end">{{ data.businessId }}</p>
     </ion-item>
     <ion-item>
-      <p>Päätoimiala</p> 
-      <p slot="end">{{ data.businessLines[i].name }}</p>
+      <p *ngIf="i==0">Rekisteröity</p>
+      <p *ngIf="i==1">Registrad</p>
+      <p *ngIf="i==2">Registered</p>
+      <p slot="end">{{ data.registrationDate | date: ('dd.MM.yyyy') }}</p>
     </ion-item>
     <ion-item>
-      <p>Kieli</p> 
+      <p *ngIf="i==0">Yritysmuoto</p>
+      <p *ngIf="i==1">Företagsform</p>
+      <p *ngIf="i==2">Company form</p>
+      <p slot="end" text-wrap style="text-align: right;">{{ data.companyForms[i].name }}</p>
+    </ion-item>
+    <ion-item>
+      <p *ngIf="i==0">Toimiala</p>
+      <p *ngIf="i==1">Industri</p>
+      <p *ngIf="i==2">Industry</p>
+      <ion-label slot="end" text-wrap style="text-align: right;">{{ data.businessLines[i].name }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <p *ngIf="i==0">Kieli</p>
+      <p *ngIf="i==1">Språk</p>
+      <p *ngIf="i==2">Language</p> 
       <p slot="end"> {{ data.languages[i].name }}</p>
     </ion-item>
     <ion-item>
-      <p>Kotipaikka</p> 
+      <p *ngIf="i==0">Kotipaikka</p>
+      <p *ngIf="i==1">Hemort</p>
+      <p *ngIf="i==2">Registered office</p>
       <p slot="end">{{ data.registedOffices[i].name }}</p>
     </ion-item>
-    <p *ngIf="data.contactDetails[i]">yhteystiedot {{ data.contactDetails[i].name }}</p><br>
-  <ion-item>
-    <p>Osoite</p>
-    <p>{{ data.addresses[0].street }}</p>
-    <p>{{ data.addresses[0].postCode }}</p>
-    <p>{{ data.addresses[0].city }}</p>
-  </ion-item>
+    <ion-item>
+      <p>{{ data.contactDetails[i].type}}</p> 
+      <p slot="end">{{ data.contactDetails[i].value}}</p>
+    </ion-item>
+    <ion-item>
+        <p *ngIf="i==0">Osoite</p>
+        <p *ngIf="i==1">Adress</p>
+        <p *ngIf="i==2">Address</p>
+        <ion-label slot="end" style="text-align: right;">
+        <p>{{ data.addresses[0].street }}</p>
+        <p>{{ data.addresses[0].postCode }}</p>
+        <p>{{ data.addresses[0].city }}</p>
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>
