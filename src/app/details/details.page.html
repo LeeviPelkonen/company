@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title *ngIf="data">{{ data.names[i].name }}</ion-title>
+      <ion-title *ngIf="data">{{ data.names[0].name }}</ion-title>
     </ion-toolbar>
    </ion-header>
 
@@ -45,11 +45,13 @@
       <p *ngIf="i==2">Registered office</p>
       <p slot="end">{{ data.registedOffices[i].name }}</p>
     </ion-item>
-    <ion-item>
-      <p>{{ data.contactDetails[i].type}}</p> 
-      <p slot="end">{{ data.contactDetails[i].value}}</p>
+    <ion-item *ngIf="data.contactDetails[0]">
+      <p *ngIf="i==0">Puhelin</p>
+      <p *ngIf="i==1">Telefon</p>
+      <p *ngIf="i==2">Telephone</p> 
+      <p slot="end">{{ data.contactDetails[0].value}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="data.addresses[0]">
         <p *ngIf="i==0">Osoite</p>
         <p *ngIf="i==1">Adress</p>
         <p *ngIf="i==2">Address</p>

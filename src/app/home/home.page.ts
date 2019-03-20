@@ -40,6 +40,32 @@ export class HomePage {
   search(){
     console.log("searching now");
     this.data=[];
+    if(this.id){
+      this.getId(this.id);
+    }
+    if(this.name){
+    this.http.get("http://avoindata.prh.fi/bis/v1?maxResults=20&name=" + this.name, {}, {})
+      .then(data => {
+        JSON.parse(data.data).results.forEach(element => {
+          this.getId(element.businessId);
+        });
+      });
+    }
+  }
+  getId(id:string){
+    this.http.get("http://avoindata.prh.fi/bis/v1/" + id, {}, {})
+    .then(data => {
+      this.filterData(JSON.parse(data.data).results);
+    });
+  }
+
+  go(data: any){
+    this.storage.set('data', data);
+    this.storage.set('language', this.value);
+    this.router.navigate(['details']);
+  }
+
+  filterData(datas:any){
     this.filteredData = {
       "businessId": "",
       "registrationDate": "",
@@ -54,19 +80,6 @@ export class HomePage {
       "registeredEntries": [],
       "businessIdChanges": []
     };
-    this.http.get("http://avoindata.prh.fi/bis/v1/" + this.id, {}, {})
-      .then(data => {
-        this.filterData(JSON.parse(data.data).results);
-      });
-  }
-
-  go(data: any){
-    this.storage.set('data', data);
-    this.storage.set('language', this.value);
-    this.router.navigate(['details']);
-  }
-
-  filterData(datas:any){
     datas.forEach(data => {
       this.filteredData.businessId = data.businessId;
       this.filteredData.registrationDate = data.registrationDate;
@@ -143,6 +156,7 @@ export class HomePage {
       }
     });
     this.data.push(this.filteredData);
+    console.log(this.data);
   });
   }
 }
