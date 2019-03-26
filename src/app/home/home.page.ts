@@ -38,7 +38,8 @@ export class HomePage {
   }
 
   search(){
-    console.log("searching now");
+    //console.log("searching now");
+    this.storage.clear();
     this.data=[];
     if(this.id){
       this.getId(this.id);
@@ -85,7 +86,7 @@ export class HomePage {
       this.filteredData.registrationDate = data.registrationDate;
     //filtering outdated and unnecessary data
     //names
-    console.log("filtering this");
+    //console.log("filtering this");
     //console.log(data);
     data.names.forEach(res => {
       if(res.version == 1){
@@ -95,14 +96,14 @@ export class HomePage {
     //auxiliaryNames
     data.auxiliaryNames.forEach(res => {
       if(res.version == 1){
-        console.log(res);
+        //console.log(res);
         this.filteredData.auxiliaryNames.push(res);
       }
     });
     //addresses
     data.addresses.forEach(res => {
       if(res.version == 1 && res.type == 1){
-        console.log(res);
+        //console.log(res);
         this.filteredData.addresses.push(res);
       }
     });
@@ -156,7 +157,7 @@ export class HomePage {
       }
     });
     this.data.push(this.filteredData);
-    console.log(this.data);
+    //console.log(this.data);
   });
   }
 }

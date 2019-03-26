@@ -16,13 +16,17 @@ export class DetailsPage implements OnInit {
     private storage: Storage
   ) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.loadData();
+  }
+
+  loadData(){
     this.storage.get('language').then((i) => {
       this.i = i;
     });
     this.storage.get('data').then((val) => {
       this.data = val;
-      console.log(val);
+      //console.log(val);
     });
   }
 }
